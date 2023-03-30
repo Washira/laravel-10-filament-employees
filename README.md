@@ -33,6 +33,7 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
+
 ### Premium Partners
 
 - **[Vehikl](https://vehikl.com/)**
@@ -64,3 +65,91 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## About Configure The Project
+
+### Setup This Project
+
+After you have installed PHP and Composer, you can create a new Laravel project via the Composer create-project command:
+
+```
+composer create-project laravel/laravel filament-employees
+```
+
+In this case, we choose the project name is `filament-employees`.
+
+After the project has been created, start Laravel's local development server using the Laravel's Artisan CLI `serve` command:
+
+```
+cd filament-employees/
+
+php artisan serve
+```
+or you can start the server after all installation processes would be complete.
+
+### Install Breeze
+
+You may install Laravel Breeze using Composer.
+
+```
+composer require laravel/breeze --dev
+```
+
+You may run the `breeze:install` Artisan command.
+
+```
+php artisan breeze:install
+```
+
+See more details of Breeze [here](https://laravel.com/docs/10.x/starter-kits)
+
+### Migration Data from Database
+
+You may migrate data for this project
+
+First, you should config db environment on `.env`'s `DB_` parts.
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Then, you may connect your database using db workbrench,
+The example is `Tableplus`.
+
+See more detail of [Tableplus here](https://docs.tableplus.com/getting-started).
+
+Next, migrate data from the database.
+
+```
+php artisan migrate
+```
+
+You may see the result in command like below.
+
+```
+
+   INFO  Preparing database.
+
+  Creating migration table .................................................................................... 23ms DONE
+
+   INFO  Running migrations.
+
+  2014_10_12_000000_create_users_table ........................................................................ 11ms DONE
+  2014_10_12_100000_create_password_reset_tokens_table ......................................................... 7ms DONE
+  2019_08_19_000000_create_failed_jobs_table ................................................................... 6ms DONE
+  2019_12_14_000001_create_personal_access_tokens_table ....................................................... 10ms DONE
+```
+
+The migration data has been successfully.
+
+### Install Filament
+
+```
+composer require filament/filament:"^2.0"
+```
+
