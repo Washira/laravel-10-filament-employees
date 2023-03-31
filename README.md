@@ -149,7 +149,71 @@ The migration data has been successfully.
 
 ### Install Filament
 
+To get started with the admin panel, you can install it using the command:
+
 ```
 composer require filament/filament:"^2.0"
 ```
 
+Each time you upgrade Filament, you need to run the filament:upgrade command. We recommend adding this to your composer.json's post-update-cmd:
+
+```
+"post-update-cmd": [
+    // ...
+    "@php artisan filament:upgrade"
+],
+```
+
+If you don't have one, you may create a new user account using:
+
+```
+php artisan make:filament-user
+```
+
+You will see the result and have to type `Name`, `Email Address`, and `Password` just like below:
+
+```
+ Name:
+ > admin	
+
+ Email address:
+ > admin@admin.com
+
+ Password:
+ >
+```
+
+In this case, we select name as `admin` and email as `admin@admin.com`, if you type too short password, this message will be displayed:
+
+```
+The password field must be at least 8 characters.
+
+ Password:
+ >
+```
+
+If you typed password succussfully, the success message would display like this.
+
+```
+Success! admin@admin.com may now log in at http://localhost/admin/login.
+```
+
+You may comeback to start server using the Laravel's Artisan CLI `serve` command:
+
+```
+php artisan serve
+```
+
+See the result
+
+```
+INFO  Server running on [http://127.0.0.1:8000].  
+
+Press Ctrl+C to stop the server
+```
+
+See the panel on browser by local ip:
+
+```
+http://127.0.0.1:8000/admin/login
+```
