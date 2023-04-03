@@ -217,3 +217,46 @@ See the panel on browser by local ip:
 ```
 http://127.0.0.1:8000/admin/login
 ```
+
+## Fix Login Attempt
+
+Add number of times to login for prevent user too many attempt.
+
+See in `app` > `Http` > `Controllers` > `Auth` > `AuthenticatedSessionController.php` to notice a function store a login request, we may see `LoginRequest` inside that.
+
+Go to `app` > `Http` > `Controllers` > `Auth` > `LoginRequest.php` for config times of login.
+
+See `ensureIsNotRateLimited()` for config time of login
+
+```
+...
+if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+  return;
+}
+...
+```
+
+In part of this expression, you can change the number of login time (by default is 5) for me, change it to be 3.
+
+```
+...
+if (! RateLimiter::tooManyAttempts($this->throttleKey(), 3)) {
+  return;
+}
+...
+```
+
+and see in `authenticate()`.
+
+```
+...
+if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+  RateLimiter::hit($this->throttleKey(), 350);
+
+  ...
+}
+...
+```
+
+Add another parameter in `hit` (after `$this->throttleKey()`) with a number for config duration when over the limit of attemption login.
+
